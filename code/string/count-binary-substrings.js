@@ -1,7 +1,20 @@
-export default string => {
-    let arr = string.split('');
-    let num = 0;
-    for (let i = 2; i <= arr.length; i + 2) {
-
+export default (str) => {
+    let r = [];
+    let match = (str) => {
+        let j = str.match(/^(0+|1+)/)[0];
+        let o = (j[0] ^ 1).toString().repeat(j.length);
+        let reg = new RegExp(`^(${j}${o})`);
+        if (reg.test(str)) {
+            return RegExp.$1
+        } else {
+            return ''
+        }
+    };
+    for (let i = 0, len = str.length - 1; i < len; i++) {
+        let sub = match(str.slice(i));
+        if (sub) {
+            r.push(sub)
+        }
     }
+    return r
 }
